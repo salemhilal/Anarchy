@@ -1,13 +1,13 @@
 #ANARCHY!!!!1
 
-##MVP:
+###MVP:
 1. Map generation
 2. Turn-based combat
 3. Projectiles and collision damage
 4. Menu
 5. Character model(s)
 
-##Objects
+###Objects
 1. Players
 	{
 		health: int,
@@ -20,4 +20,4 @@
 		type:   String
 	}]
 
-##Todo Stuff: 
+###Todo Stuff: 
