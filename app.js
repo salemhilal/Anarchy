@@ -3,9 +3,8 @@ used in weapons and interact with their environment. Each projectile defines a m
 damage amount and most importantly, a trajectory equation*/
 
 function Projectile() {
-
 }
-
+Projectile.prototype.position = (0,0);
 Projectile.prototype.mass = 10;
 Projectile.prototype.equation = [1, 1, 1];
 Projectile.prototype.intialPosition = (0,0);
@@ -15,8 +14,24 @@ Projectile.prototype.damage = 50; // Damage at center of radius
 
 // Weapons
 function Weapon() {
-	this.fire = function(angle, mode, power) {}; // Fires the weapon at a given angle, mode, power
-	this.switchMode = function() {}; // Switches the weapon mode (if there is a secondary)
+	this.fire = function(angle, power) {
+		if (this.ammunition > 0) {
+		// Launch the projectile
+		}
+	};
+
+	this.explode = function() {
+
+	};
+
+	this.switchMode = function() {
+		if (this.currentMode == "primary" && this.secondaryProjectile != null) {
+			this.currentMode = "secondary";
+		}
+		else {
+			this.currentMode = "primary";
+		}
+	}; // Switches the weapon mode (if there is a secondary)
 }
 
 Weapon.prototype.name = "Bow"
@@ -25,15 +40,28 @@ Weapon.prototype.range = 100;
 Weapon.prototype.ammunition = 20;
 Weapon.prototype.accuracy = 20;
 
-Weapon.prototype.primaryProjectile = Projectile("arrow");
-Weapon.prototype.secondaryProjectile = null;
+Weapon.prototype.primaryProjectile = Projectile();
+Weapon.prototype.secondaryProjectile = Projectile();
 
 
 // Player prototype
 function Player() {
-    this.move = function(vector) {}; // Moves the player by a vector left or right
-    this.aimWeapon = function (direction) {}; // Aims the players weapon in a given direction (0-360)
-    this.shootWeapon = function (weaponMode) {}; // Fires the weapon in primary or secondary mode
+
+	// Moves the player by a vector left or right
+    this.move = function(vector) {
+    	// Check if the move is legal, then...
+    	this.x += vector[0];
+    	this.y += vector[1];
+    }; 
+
+    // aim the weapon up or down
+    this.aimWeapon = function (direction) {
+    	this.weaponAngle += direction;
+    }; 
+
+    this.shootWeapon = function () {
+    	this.currentWeapon.fire(this.weaponAngle, this.weaponPower);
+    }; // Fires the weapon in primary or secondary mode
 
     this.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
     this.dropObject = function (objectName) {}; // Adds nearby object to inventory
@@ -43,12 +71,17 @@ function Player() {
 }
 
 Player.prototype.health = 100;
-Player.prototype.position = (0,0);
+
+Player.prototype.x = 0;
+Player.prototype.y = 0;
+
 Player.prototype.color = "black";
 Player.prototype.name = "Wilson";
 
 Player.prototype.inverntory = [];
 Player.prototype.weapons = []; // 0:Primary 2:Secondary 3:Grenades 4:Special
+Player.prototype.currentWeapon = Player.prototype.weapons[0];
+Player.prototype.aimAngle = 0;
 
 Player.prototype.score = 0; // Based on how many kills you have / how much havok you wreak
 
