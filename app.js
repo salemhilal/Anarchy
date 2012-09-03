@@ -59,13 +59,16 @@ function Player() {
     	this.weaponAngle += direction;
     }; 
 
+    this.adjustPower = function (change) {
+    	this.weaponPower += change;
+    };
+
     this.shootWeapon = function () {
     	this.currentWeapon.fire(this.weaponAngle, this.weaponPower);
     }; // Fires the weapon in primary or secondary mode
 
     this.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
     this.dropObject = function (objectName) {}; // Adds nearby object to inventory
-
     this.switchWeapon = function (objectName) {}; // Cycles through the players weapons
 
 }
