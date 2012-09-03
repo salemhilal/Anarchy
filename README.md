@@ -10,14 +10,15 @@
 ###Objects
 1. Players
 	{
-		health: int,
-		ammo:   int, 
-		move:   int
+		health: *int*,
+		ammo:   *int*, 
+		move:   *int*
 	}
 2. Map : 
 	[{
-		height: int,
-		type:   String
+		height: *int*,
+		type:   *String*
 	}]
 
 ###Todo Stuff: 
+1. Generate a map.
