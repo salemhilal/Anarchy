@@ -98,6 +98,9 @@ Player.prototype.kills = 0; // A parameter that records how many kills you have
 Player.prototype.charm = 10
 
 
+var gameObjects = [];
+
+
 /* Generates a walkable map for the game
  * Map is of type [{height: int}]
  *   walkHeight: how high/low falling can occur
@@ -127,5 +130,28 @@ function generateMap (walkHeight, width, initialHeight){
 	}
 
 	return generateChunk(width, initialHeight);
+}
 
+//Generate map
+
+//Draw map
+
+//Draw players
+
+//Set turn to player 1
+
+//animation loop
+var run = true; 
+while(run){
+
+		updateCanvas()
+
+
+}
+
+function updateCanvas(){
+	//Check each render-able object, and call its move function
+	a.forEach(function(x){
+		x.draw();
+	})
 }
