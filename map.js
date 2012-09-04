@@ -9,7 +9,7 @@ function generateMap (walkHeight, width, initialHeight){
 
 	function generateChunk(curWidth, prevHeight){
 		var newHeight = prevHeight ((2*Math.random() - 1) * walkHeight)
-		if(curWidth <= 5){
+		if(curWidth <= 10){
 			var r = [];
 			for(var i=0; i<curWidth; i++){
 				r.push({height: newHeight});
@@ -17,7 +17,7 @@ function generateMap (walkHeight, width, initialHeight){
 			return r; 
 		}
 		else{
-			var chunkWidth = (Math.random() * 5 + 1);
+			var chunkWidth = (Math.random() * 10 + 1);
 			var r = []
 			for(var i=0; i<curWidth; i++){
 				r.push({height: newHeight});
@@ -27,4 +27,20 @@ function generateMap (walkHeight, width, initialHeight){
 	}
 
 	return generateChunk(width, initialHeight);
+}
+
+function Map(colWidth, walkHeight){
+	if(colWidth == null) 
+		this.colWidth = 5;
+	else 
+		this.colWidth = colWidth;
+
+	this.columns = generateMap(walkHeight, 900/this.colWidth, initialHeight)
+
+
+
+}
+
+Map.prototype.draw = function(){
+
 }
