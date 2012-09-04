@@ -25,7 +25,6 @@ function generateMap (walkHeight, width, initialHeight){
 			return r.concat(generateChunk(curWidth - chunkWidth, newHeight))
 		}
 	}
-
 	return generateChunk(width, initialHeight);
 }
 
@@ -36,11 +35,8 @@ function Map(colWidth, walkHeight){
 		this.colWidth = colWidth;
 
 	this.columns = generateMap(walkHeight, 900/this.colWidth, initialHeight)
-
-
-
 }
 
-Map.prototype.draw = function(){
+Map.prototype.draw = function(){ 
 
 }
