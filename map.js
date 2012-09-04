@@ -18,6 +18,51 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	Map.prototype.columnWidth = 15;
 	Map.prototype.walkHeight  = 240;
 	Map.prototype.dropHeight  = 100;
+	Map.prototype.colors = {1: "", 2: "#dedcdb", 3:"#f1f1f1", 4:"#988e86", 5:"#493728", 6:"000000", 7:"ffffff", 8:"#fbf5f5", 9:"#e1e1e1"};
+	Map.prototype.cloud =  [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,4,4,4,4,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,4,9,9,7,7,4,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,4,9,9,8,7,8,8,4,4,4,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,4,9,9,8,8,8,8,7,7,4,4,1,1,1,1,1],
+			 [1,1,1,1,4,4,4,4,4,4,4,9,9,9,8,7,7,7,7,4,1,1,1,1,1],
+			 [1,1,1,4,9,8,8,7,7,7,7,4,9,9,7,7,7,7,7,4,4,1,1,1,1],
+			 [1,1,4,9,9,8,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4,4,1,1],
+			 [1,4,9,9,9,9,8,8,8,7,7,7,7,7,7,7,7,7,9,9,8,8,9,4,1],
+			 [1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,9,9,9,9,9,4,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,4,4,4,4,4,4,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],]
+	Map.prototype.drawGrid = function drawGuy2(guy, size, position) {
+	    for(var row = 0; row < 25; row++) {
+			for(var col = 0; col <25; col++) {
+				var pixel = guy[row][col]
+				if (pixel === 1)
+					{continue;}
+				else
+					{
+					ctx.fillStyle = this.colors[pixel];
+					var xpos = col*size + position[0];
+					var ypos = row*size + position[1];
+					ctx.fillRect(xpos, ypos, size, size);
+				}
+			}
+		}
+	}
+	Map.prototype.cloud1 = 0;
+	Map.prototype.cloud2 = 0;
+
 	//Gets the column at x
 	Map.prototype.getColumn = function(x){
 		if(this.columns[Math.floor(x/this.columnWidth)])
@@ -89,12 +134,24 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	    	this.columns[x] = newColumn;
 		}
 	}
-
 	//Draws the... uh, sky.
 	Map.prototype.drawSky = function (ctx){
 		ctx.fillStyle = "#53545E";
 		ctx.fillRect(0, 0, this.width, this.height);
 	}
+
+	//Draws the ground
+	Map.prototype.drawClouds = function(ctx){
+		this.cloud1 = (this.cloud1 + .5) % this.width;
+		this.cloud2 = (this.cloud2 + .2) % this.width;
+		console.log(this.cloud1)
+		console.log(this.cloud2)
+		console.log("those were clouds")
+		this.drawGrid(this.cloud, 3, [this.cloud2,20]);
+    	this.drawGrid(this.cloud, 6, [this.cloud1,50]);
+	}
+
+
 
 	//Draws the ground.
 	Map.prototype.drawGround = function(ctx) {
@@ -123,13 +180,17 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 
 			pos += columnWidth;
 		}
-	};
+	}
 
 	Map.prototype.draw = function(ctx) {
 		//First, draw the sky.
 		this.drawSky(ctx);
-		//Then, overlay the ground on top.
+		//Then, put some clouds on dat.
+		this.drawClouds(ctx);
+		//Finally, overlay the ground on top.
 		this.drawGround(ctx);
 	}
+
+
 
 
