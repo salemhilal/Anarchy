@@ -131,13 +131,16 @@ function generateMap (walkHeight, width, initialHeight){
 			return r.concat(generateChunk(curWidth - chunkWidth, newHeight))
 		}
 	}
-
 	return generateChunk(width, initialHeight);
 }
 
 //Generate map
 
 //Draw map
+
+function drawMap(map) {
+
+}
 
 //Draw players
 
