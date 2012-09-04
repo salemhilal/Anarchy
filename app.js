@@ -2,74 +2,49 @@
 used in weapons and interact with their environment. Each projectile defines a mass, damage raduius,
 damage amount and most importantly, a trajectory equation*/
 
-function Projectile() {
-}
-Projectile.prototype.position = (0,0);
-Projectile.prototype.mass = 10;
-Projectile.prototype.equation = [1, 1, 1];
-Projectile.prototype.intialPosition = (0,0);
+function Projectile() {}
+	
+	
 
-Projectile.prototype.damageRaduis = 10;
-Projectile.prototype.damage = 50; // Damage at center of radius
+	Projectile.prototype.position = (0,0);
+	Projectile.prototype.mass = 10;
+	Projectile.prototype.equation = [1, 1, 1];
+	Projectile.prototype.intialPosition = (0,0);
+
+	Projectile.prototype.damageRaduis = 10;
+	Projectile.prototype.damage = 50; // Damage at center of radius
+
+	Projectile.prototype.explode = function() {
+	
+	};
 
 // Weapons
-function Weapon() {
-	this.fire = function(angle, power) {
+function Weapon() {};
+	Weapon.prototype.name = "Bow";
+	Weapon.prototype.currentMode = "primary"; // Primary or secondary mode
+	Weapon.prototype.range = 100; 
+	Weapon.prototype.ammunition = 20;
+	Weapon.prototype.accuracy = 20;
+
+	Weapon.prototype.primaryProjectile = Projectile();
+	Weapon.prototype.secondaryProjectile = Projectile();
+
+	Weapon.prototype.fire = function(angle, power) {
 		if (this.ammunition > 0) {
-		// Launch the projectile
-		}
 	};
 
-	this.explode = function() {
-
-	};
-
-	this.switchMode = function() {
+	Weapon.prototype.switchMode = function() {
 		if (this.currentMode == "primary" && this.secondaryProjectile != null) {
 			this.currentMode = "secondary";
 		}
-		else {
-			this.currentMode = "primary";
-		}
+		else {this.currentMode = "primary"}
 	}; // Switches the weapon mode (if there is a secondary)
-}
-
-Weapon.prototype.name = "Bow"
-Weapon.prototype.currentMode = "primary"; // Primary or secondary mode
-Weapon.prototype.range = 100; 
-Weapon.prototype.ammunition = 20;
-Weapon.prototype.accuracy = 20;
-
-Weapon.prototype.primaryProjectile = Projectile();
-Weapon.prototype.secondaryProjectile = Projectile();
 
 
 // Player prototype
 function Player() {
 
-	// Moves the player by a vector left or right
-    this.move = function(vector) {
-    	// Check if the move is legal, then...
-    	this.x += vector[0];
-    	this.y += vector[1];
-    }; 
 
-    // aim the weapon up or down
-    this.aimWeapon = function (direction) {
-    	this.weaponAngle += direction;
-    }; 
-
-    this.adjustPower = function (change) {
-    	this.weaponPower += change;
-    };
-
-    this.shootWeapon = function () {
-    	this.currentWeapon.fire(this.weaponAngle, this.weaponPower);
-    }; // Fires the weapon in primary or secondary mode
-
-    this.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
-    this.dropObject = function (objectName) {}; // Adds nearby object to inventory
-    this.switchWeapon = function (objectName) {}; // Cycles through the players weapons
 
 }
 
@@ -99,6 +74,30 @@ Player.prototype.inventory = [];
 Player.prototype.money = 0;
 Player.prototype.kills = 0; // A parameter that records how many kills you have
 Player.prototype.charm = 10
+
+// Moves the player by a vector left or right
+Player.prototype.move = function(vector) {
+	// Check if the move is legal, then...
+	this.x += vector[0];
+	this.y += vector[1];
+}; 
+
+// aim the weapon up or down
+Player.prototype.aimWeapon = function (direction) {
+	this.weaponAngle += direction;
+}; 
+
+Player.prototype.adjustPower = function (change) {
+	this.weaponPower += change;
+};
+
+Player.prototype.shootWeapon = function () {
+	this.currentWeapon.fire(this.weaponAngle, this.weaponPower);
+}; // Fires the weapon in primary or secondary mode
+
+Player.prototype.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
+Player.prototype.dropObject = function (objectName) {}; // Adds nearby object to inventory
+Player.prototype.switchWeapon = function (objectName) {}; // Cycles through the players weapons
 
 
 var gameObjects = [];
