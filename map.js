@@ -1,42 +1,40 @@
-/* Generates a walkable map for the game
- * Map is of type [{height: int}]
- *   walkHeight: how high/low falling can occur
- *	 width: how wide the map should be.
- */
-function generateMap (walkHeight, width, initialHeight){
-	if(initialHeight == undefined)
-		initialHeight == 200
+function randomRange(x, y) {
+	return Math.floor( Math.random() * (y - x + 1) + x);
+}
 
-	function generateChunk(curWidth, prevHeight){
-		var newHeight = prevHeight ((2*Math.random() - 1) * walkHeight)
-		if(curWidth <= 10){
-			var r = [];
-			for(var i=0; i<curWidth; i++){
-				r.push({height: newHeight});
-			}
-			return r; 
-		}
-		else{
-			var chunkWidth = (Math.random() * 10 + 1);
-			var r = []
-			for(var i=0; i<curWidth; i++){
-				r.push({height: newHeight});
-			}
-			return r.concat(generateChunk(curWidth - chunkWidth, newHeight))
+function Column() {}
+	Column.prototype.material = 0; // 0:Rock
+	Column.prototype.height = 200;
+
+function Map() {}
+	Map.prototype.height = 600; // default for our game
+	Map.prototype.columns = [];
+	Map.prototype.columnWidth = 20;
+	Map.prototype.walkHeight = 300;
+	Map.prototype.dropHeight = 100;
+
+	Map.prototype.generate = function (mapWidth) {
+		numberOfColumns = mapWidth / this.columnWidth;
+		for (var x = 0; x < numberOfColumns; x++) {
+
+	    	var newColumn = new Column();
+	    	newColumn.height = randomRange(this.walkHeight - 20, this.walkHeight + 20);
+	    	this.columns[x] = newColumn;
 		}
 	}
-	return generateChunk(width, initialHeight);
-}
 
-function Map(colWidth, walkHeight){
-	if(colWidth == null) 
-		this.colWidth = 5;
-	else 
-		this.colWidth = colWidth;
+	Map.prototype.draw = function(ctx) {
+		var pos = 0;
+		var columnWidth = this.columnWidth;
+	    var mapHeight = this.height;
 
-	this.columns = generateMap(walkHeight, 900/this.colWidth, initialHeight)
-}
+		for (var x = 0; x < this.columns.length; x++) {
+			var height = this.columns[x].height;
+			var color = "#3D3D3D"
+	    	ctx.fillStyle = color;
+			ctx.fillRect(pos, mapHeight - height, columnWidth, height);
+			pos += columnWidth;
+		}
+	};
 
-Map.prototype.draw = function(){ 
 
-}

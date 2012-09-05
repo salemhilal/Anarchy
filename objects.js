@@ -5,15 +5,12 @@ damage amount and most importantly, a trajectory equation*/
 function Projectile() {}
 	Projectile.prototype.position = (0,0);
 	Projectile.prototype.mass = 10;
-	Projectile.prototype.equation = [1, 1, 1];
 	Projectile.prototype.intialPosition = (0,0);
 	Projectile.prototype.damageRaduis = 10;
 	Projectile.prototype.damage = 50; // Damage at center of radius
 	Projectile.prototype.explode = function() {
-
 	Projectile.prototype.drawArray = []; // 2D array of integers that contain colors of pixels to draw
 	Projectile.prototype.draw = function() {}
-
 };
 
 
@@ -68,6 +65,9 @@ function Player() { }
 	Player.prototype.money = 0;
 	Player.prototype.kills = 0; // A parameter that records how many kills you have
 	Player.prototype.charm = 10
+
+	// Some drawing parameters
+	Player.prototype.facingRight = true;
 
 	// Moves the player by a vector left or right
 	Player.prototype.move = function(vector) {
