@@ -38,7 +38,25 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	}
 	//Explodes column at x, with radius p
 	Map.prototype.explode = function(x,p){
-
+		if (p == 0) return;
+		var index = Math.floor(x/this.columnWidth);
+		if(this.columns[index]){
+			col = this.columns[index]
+			col.hasGrass = false;
+			col.height = col.height -  parseInt(this.columnWidth * p);
+		}
+		for(var i=1; i<=p; i++){
+			if(this.columns[index +i]){
+				col = this.columns[index - i]
+				col.hasGrass = false;
+				col.height = col.height -  parseInt(this.columnWidth * (1/i) * p);
+			}
+			if(this.columns[index -i]){
+				col = this.columns[index - i]
+				col.hasGrass = false;
+				col.height = col.height -  parseInt(this.columnWidth * (1/i) * p);
+			}
+		}
 	}
 	Map.prototype.generate = function () {
 		var numberOfColumns = this.width / this.columnWidth;

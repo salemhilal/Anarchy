@@ -37,8 +37,5 @@ function animationTest(){
 
 //Animation loop
 var animator = setInterval(function(){
-	/*if(framecount%50 == 0){
-		map.generate(900);	
-	}*/
 	updateCanvas();
 }, frameLength)

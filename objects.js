@@ -13,11 +13,10 @@ function Projectile(x,y, dx, dy, update) {
 	Projectile.prototype.color 			= "#303030";
 	Projectile.prototype.vector    		= {dx:0, dy:0};
 	Projectile.prototype.exploded       = false; //If the projectile has hit. 
-	Projectile.prototype.damageRaduis   = 2; //Columns left and right that get effected.
+	Projectile.prototype.power		    = 2; //Columns left and right that get effected.
 	Projectile.prototype.height         = 10;
 	Projectile.prototype.width          = 10;
 	Projectile.prototype.damage         = 50; // Damage at center of radius
-	Projectile.prototype.explode        = function() {};
 	Projectile.prototype.drawArray      = []; // 2D array of integers that contain colors of pixels to draw
 	Projectile.prototype.update         = function(){
 
@@ -26,7 +25,7 @@ function Projectile(x,y, dx, dy, update) {
 
 		if(window.map.height - window.map.getColumnHeight(x) <= y){ //Explode!
 			console.log("exploding");
-			this.explode(window.map.getColumnHeight(x))
+			(window.map.explode(x, this.power))
 			this.exploded = true;
 		}
 		else{
