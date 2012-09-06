@@ -17,7 +17,7 @@ function drawSky(ctx){
 	ctx.fillRect(0, 0, 900, 600);
 }
 
-function drawMap(){
+function drawMap(ctx){
 	map.draw(ctx)
 }
 
@@ -25,10 +25,17 @@ function updateCanvas(){
 	//Draw the sky
 	drawSky(ctx);
 	//Overlay the map
-	map.draw(ctx);
+	drawMap(ctx);	
 	//Draw the characters
 		//TODO
 }
 
 //Animation loop
+var framecount = 0;
+var animator = setInterval(function(){
+	framecount++;
+	if(framecount%50 == 0){
+		map.generate(900);	
+	}
 	updateCanvas();
+}, 20)
