@@ -11,7 +11,7 @@ function Projectile() {}
 	Projectile.prototype.explode = function() {};
 	Projectile.prototype.drawArray = []; // 2D array of integers that contain colors of pixels to draw
 	Projectile.prototype.update = function(){}
-	Projectile.prototype.draw = function() {};
+	Projectile.prototype.draw = function(ctx) {};
 
 
 function Weapon() {}
@@ -42,13 +42,13 @@ function Weapon() {}
 	}
 
 	Weapon.prototype.drawArray = [] // 2D array of integers that contain colors of pixels to draw
-	Weapon.prototype.draw = function() { 
+	Weapon.prototype.draw = function(ctx) { 
 
 	}
 
 
 // Player prototype
-function Player() { }
+function Player() {}
 	Player.prototype.health = 100;
 	Player.prototype.x = 0;
 	Player.prototype.y = 0;
@@ -97,7 +97,8 @@ function Player() { }
 			//If it would pass through the height, move it to the ground.
 		//else move it to the ground (it shouldn't hit this case.)
 	}
-	Player.prototype.draw = function() {
-
+	Player.prototype.draw = function(ctx) {
+		//TODO: This better not be a rectangle.
+		ctx.fillRect(50, 150, 50, 100);
 	}
 
