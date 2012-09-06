@@ -1,14 +1,34 @@
-/* Generates a walkable map for the game
- * Map is of type [{height: int}]
- *   walkHeight: how high/low falling can occur
- *	 width: how wide the map should be.
- */
+
 
 
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-var x = new Map();
-x.generate(900);
-x.draw(ctx);
+var map = new Map();
+map.generate(900);
+
+var gameObjects = [];
+
+
+//Draws the.. uh, sky.
+function drawSky(ctx){
+	ctx.fillStyle = "#7E79EB";
+	ctx.fillRect(0, 0, 900, 600);
+}
+
+function drawMap(){
+	map.draw(ctx)
+}
+
+function updateCanvas(){
+	//Draw the sky
+	drawSky(ctx);
+	//Overlay the map
+	map.draw(ctx);
+	//Draw the characters
+		//TODO
+}
+
+//Animation loop
+	updateCanvas();
