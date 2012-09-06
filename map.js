@@ -42,9 +42,9 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 
 		//Initial damage
 		var index = Math.floor(x/this.columnWidth);
-		if(this.columns[index]){
+		if(this.columns[index] != null){
 
-			window.explodeEffect(x, this.height - this.getColumnHeight(x), "#B55D2A")
+			window.explodeEffect(x, this.height - this.getColumnHeight(x), p, "#B55D2A")
 			col = this.columns[index]
 			col.hasGrass = false;
 			col.height = col.height -  parseInt(this.columnWidth * p);
@@ -55,14 +55,14 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 
 		//Splash damage
 		for(var i=1; i<=p; i++){
-			if(this.columns[index +i]){
-				col = this.columns[index - i]
+			if(this.columns[index +i] != null){
+				col = this.columns[index + i]
 				col.hasGrass = false;
 				col.height = col.height -  parseInt(this.columnWidth * (1/i) * p);
 				if(col.height < col.toneHeight) col.toneHeight = col.height;
 				if(col.height <= 0) col.height = 0;
 			}
-			if(this.columns[index -i]){
+			if(this.columns[index -i] != null){
 				col = this.columns[index - i]
 				col.hasGrass = false;
 				col.height = col.height -  parseInt(this.columnWidth * (1/i) * p);
