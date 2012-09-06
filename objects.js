@@ -8,10 +8,9 @@ function Projectile() {}
 	Projectile.prototype.intialPosition = (0,0);
 	Projectile.prototype.damageRaduis = 10;
 	Projectile.prototype.damage = 50; // Damage at center of radius
-	Projectile.prototype.explode = function() {
+	Projectile.prototype.explode = function() {};
 	Projectile.prototype.drawArray = []; // 2D array of integers that contain colors of pixels to draw
-	Projectile.prototype.draw = function() {}
-};
+	Projectile.prototype.draw = function() {};
 
 
 function Weapon() {};
@@ -33,6 +32,7 @@ function Weapon() {};
 			this.currentMode = "secondary";
 		}
 		else {this.currentMode = "primary"}
+	}
 
 	Weapon.prototype.drawArray = [] // 2D array of integers that contain colors of pixels to draw
 	Weapon.prototype.draw = function() { 
