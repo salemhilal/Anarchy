@@ -10,10 +10,11 @@ function Projectile() {}
 	Projectile.prototype.damage = 50; // Damage at center of radius
 	Projectile.prototype.explode = function() {};
 	Projectile.prototype.drawArray = []; // 2D array of integers that contain colors of pixels to draw
+	Projectile.prototype.update = function(){}
 	Projectile.prototype.draw = function() {};
 
 
-function Weapon() {};
+function Weapon() {}
 	Weapon.prototype.name = "Bow";
 	Weapon.prototype.currentMode = "primary"; // Primary or secondary mode
 	Weapon.prototype.range = 100; 
@@ -24,21 +25,26 @@ function Weapon() {};
 
 	Weapon.prototype.fire = function(angle, power) {
 		if (this.ammunition > 0) {
-
-	};
+			//Render a projectile (give it coordinates and direction)
+			return true;
+		}
+		else
+			return false
+	}
 
 	Weapon.prototype.switchMode = function() {
 		if (this.currentMode == "primary" && this.secondaryProjectile != null) {
 			this.currentMode = "secondary";
 		}
-		else {this.currentMode = "primary"}
+		else {
+			this.currentMode = "primary"
+		}
 	}
 
 	Weapon.prototype.drawArray = [] // 2D array of integers that contain colors of pixels to draw
 	Weapon.prototype.draw = function() { 
 
 	}
-};
 
 
 // Player prototype
@@ -72,8 +78,8 @@ function Player() { }
 	// Moves the player by a vector left or right
 	Player.prototype.move = function(vector) {
 		// Check if the move is legal, then...
-		this.x += vector[0];
-		this.y += vector[1];
+		this.x += vector[0]; //TODO make this an object. Arrays don't make sense. 
+		this.y += vector[1]; //Perhaps vector = {x:int, y:int}
 	}; 
 
 	Player.prototype.shootWeapon = function (angle, power) {
@@ -84,7 +90,13 @@ function Player() { }
 	Player.prototype.dropObject = function (objectName) {}; // Adds nearby object to inventory
 	Player.prototype.switchWeapon = function (objectName) {}; // Cycles through the players weapons
 
-	Player.prototype.drawArray = []
+	Player.prototype.drawArray = [];
+	Player.prototype.update = function(){
+		//If the player's y is on that map chunk's map coordinate + 1, do nothing.
+		//else if it's above, move it down. 
+			//If it would pass through the height, move it to the ground.
+		//else move it to the ground (it shouldn't hit this case.)
+	}
 	Player.prototype.draw = function() {
 
 	}

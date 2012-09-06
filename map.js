@@ -14,7 +14,7 @@ function Column() {}
 function Map() {}
 	Map.prototype.height = 600; // default for our game
 	Map.prototype.columns = [];
-	Map.prototype.columnWidth = 20;
+	Map.prototype.columnWidth = 15;
 	Map.prototype.walkHeight = 240;
 	Map.prototype.dropHeight = 100;
 
@@ -23,14 +23,17 @@ function Map() {}
 		for (var x = 0; x < numberOfColumns; x++) {
 
 	    	var newColumn = new Column();
-	    	if(x != 0 && Math.random() < .75){ 	//Use the old block height
+	    	if(x != 0 && Math.random() < .70){ 	//Use the old block height
 	    		newColumn.height = this.columns[x-1].height;
+	    		newColumn.toneHeight = this.columns[x-1].toneHeight 
+	    		 + (Math.random() > .7 ? this.columnWidth  * randomRange(-1,1) : 0);
+
+
 	    	}
 	    	else{								//Generate a new one
 	    		newColumn.height = randomRange(this.walkHeight - 20, this.walkHeight + 20);
+	    		newColumn.toneHeight = newColumn.height - parseInt((this.height*3)/11)
 	    	}
-
-	    	newColumn.toneHeight = newColumn.height - 170 + this.columnWidth * randomRange(-1, 1) * .5;
 
 	    	this.columns[x] = newColumn;
 		}
@@ -64,7 +67,7 @@ function Map() {}
 			//Draw some grass, unless it's been blown off.
 			if(hasGrass){
 				ctx.fillStyle = "#539A44";
-				ctx.fillRect(pos, mapHeight-height, columnWidth, 15)
+				ctx.fillRect(pos, mapHeight-height, columnWidth, columnWidth)
 			}
 
 			pos += columnWidth;
