@@ -3,9 +3,11 @@ used in weapons and interact with their environment. Each projectile defines a m
 damage amount and most importantly, a trajectory equation*/
 
 //Projectile object
-function Projectile(x,y, dx, dy, update) {
+function Projectile(x,y, dx, dy, p, color, update) {
 	if(x != null && y != null){ this.coords = {x:x, y:y}; } 
 	if(dx != null && dy != null){ this.vector = {dx:dx, dy:dy}; }
+	if(p != null && color != ""){this.power = p; }
+	if(color != null ){this.color = color; console.log(color)};
 	if(update != null && typeof path == "function") //For custom defined paths
 		this.update = update;
 }
@@ -21,10 +23,8 @@ function Projectile(x,y, dx, dy, update) {
 	Projectile.prototype.update         = function(){
 
 		var x = this.coords.x, y= this.coords.y, dx = this.vector.dx, dy = this.vector.dy, map = window.map;
-		console.log(x + " " + y + " " + (window.map.height - window.map.getColumnHeight(x)));
 
 		if(window.map.height - window.map.getColumnHeight(x) <= y){ //Explode!
-			console.log("exploding");
 			(window.map.explode(x, this.power))
 			this.exploded = true;
 		}

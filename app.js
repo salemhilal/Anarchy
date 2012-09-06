@@ -9,6 +9,13 @@ var frameLength = 20 //Update the frame 50 times/sec.
   , projectiles = []
   , players = [];
 
+function explodeEffect(x, y, color){
+	for(var i = 0; i<5; i++){
+		projectiles.push(
+			new Projectile(x, y, randomRange(-2,2), randomRange(5,10),0, color)
+		);
+	}
+}
 function updateCanvas(){
 	//Draw the map
 	map.draw(ctx);	
