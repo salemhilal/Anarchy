@@ -10,6 +10,13 @@ var frameLength = 20 //Update the frame 50 times/sec.
   , players = [];
 
 
+function explodeEffect(x, y, color){
+	for(var i = 0; i<5; i++){
+		projectiles.push(
+			new Projectile(x, y, randomRange(-2,2), randomRange(5,10),0, color)
+		);
+	}
+}
 
 function updateCanvas(){
 	//Draw the map
@@ -50,9 +57,6 @@ function keyPressed(event) {
 
 //Animation loop
 var animator = setInterval(function(){
-	/*if(framecount%50 == 0){
-		map.generate(900);	
-	}*/
 	updateCanvas();
 }, frameLength)
 

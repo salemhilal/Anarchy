@@ -3,38 +3,42 @@ used in weapons and interact with their environment. Each projectile defines a m
 damage amount and most importantly, a trajectory equation*/
 
 //Projectile object
-function Projectile(x,y, dx, dy, update) {
+function Projectile(x,y, dx, dy, p, color, update) {
 	if(x != null && y != null){ this.coords = {x:x, y:y}; } 
 	if(dx != null && dy != null){ this.vector = {dx:dx, dy:dy}; }
+	if(p != null && color != ""){this.power = p; }
+	if(color != null ){this.color = color; console.log(color)};
 	if(update != null && typeof path == "function") //For custom defined paths
 		this.update = update;
 }
 	Projectile.prototype.coords    		= {x:0, y:0};
+	Projectile.prototype.color 			= "#303030";
 	Projectile.prototype.vector    		= {dx:0, dy:0};
 	Projectile.prototype.exploded       = false; //If the projectile has hit. 
-	Projectile.prototype.damageRaduis   = 2; //Columns left and right that get effected.
+	Projectile.prototype.power		    = 2; //Columns left and right that get effected.
 	Projectile.prototype.height         = 10;
 	Projectile.prototype.width          = 10;
 	Projectile.prototype.damage         = 50; // Damage at center of radius
-	Projectile.prototype.explode        = function() {};
 	Projectile.prototype.drawArray      = []; // 2D array of integers that contain colors of pixels to draw
 	Projectile.prototype.update         = function(){
+
 		var x = this.coords.x, y= this.coords.y, dx = this.vector.dx, dy = this.vector.dy, map = window.map;
-		if(window.map.getColumnHeight(x) >= y){ //Explode!
-			this.explode()
+
+		if(window.map.height - window.map.getColumnHeight(x) <= y){ //Explode!
+			(window.map.explode(x, this.power))
 			this.exploded = true;
 		}
 		else{
-			this.coords = {x:x + dx, y:y+dx};
-			this.vector = {dx:dx-1, dy: dy};
+			this.coords = {x:x + dx, y:y-dy};
+			this.vector = {dx:dx, dy: dy-.6};
 		}
-
 	}
+
 	Projectile.prototype.draw           = function(ctx) {
 		//TODO: not a rectangle. Maybe
-		var x = this.x, y = this.y, width = this.width, height = this.height;
-		ctx.fillStyle = "#0000FF";
-		ctx.fillRect(x,y,x-width, y-height);
+		var x = this.coords.x, y= this.coords.y, width = this.width, height = this.height;
+		ctx.fillStyle = this.color;
+		ctx.fillRect(x,y, width,  height);
 	};
 
 
