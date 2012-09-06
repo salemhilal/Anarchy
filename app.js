@@ -1,6 +1,6 @@
 
 
-var frameLength = 20 //Time, in ms, between frame renders. 
+var frameLength = 20 //Update the frame 50 times/sec.  
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
@@ -10,11 +10,20 @@ map.generate(900);
 var gameObjects = [];
 
 
+
 function updateCanvas(){
 	//Draw the map
 	map.draw(ctx);	
 	//Draw the characters
-		//TODO
+	gameObjects.forEach(function(x){
+		x.update();
+		x.draw();
+	})
+}
+
+function animationTest(){
+	//Draw player
+	//Apply gravity
 }
 
 //Animation loop
