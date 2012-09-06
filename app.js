@@ -10,16 +10,9 @@ map.generate(900);
 var gameObjects = [];
 
 
-//Draws the.. uh, sky.
-
-
-function drawMap(ctx){
-	map.draw(ctx)
-}
-
 function updateCanvas(){
 	//Draw the map
-	drawMap(ctx);	
+	map.draw(ctx);	
 	//Draw the characters
 		//TODO
 }
