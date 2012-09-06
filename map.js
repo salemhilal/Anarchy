@@ -30,22 +30,20 @@ function Map() {}
 	    		newColumn.height = randomRange(this.walkHeight - 20, this.walkHeight + 20);
 	    	}
 
-	    	newColumn.toneHeight = newColumn.height - 170 + randomRange(-3, 3);
+	    	newColumn.toneHeight = newColumn.height - 170 + this.columnWidth * randomRange(-1, 1) * .5;
 
 	    	this.columns[x] = newColumn;
 		}
 	}
 
+	//Draws the.. uh, sky.
 	Map.prototype.drawSky = function (ctx){
-	ctx.fillStyle = "#53545E";
-	ctx.fillRect(0, 0, 900, 600);
-}
+		ctx.fillStyle = "#53545E";
+		ctx.fillRect(0, 0, 900, 600);
+	}
 
-	Map.prototype.draw = function(ctx) {
-		//Draw the sky first
-		this.drawSky(ctx);
-
-		//Now render the ground
+	//Draws the ground.
+	Map.prototype.drawGround = function(ctx) {
 		var pos = 0
 		  , columnWidth = this.columnWidth
 	      , mapHeight = this.height;
@@ -72,5 +70,12 @@ function Map() {}
 			pos += columnWidth;
 		}
 	};
+
+	Map.prototype.draw = function(ctx) {
+		//First, draw the sky.
+		this.drawSky(ctx);
+		//Then, overlay the ground on top.
+		this.drawGround(ctx);
+	}
 
 
