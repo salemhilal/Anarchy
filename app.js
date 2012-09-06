@@ -6,13 +6,24 @@ var frameLength = 20 //Update the frame 50 times/sec.
   , ctx = canvas.getContext("2d")
   
   , map = new Map()
-  , gameObjects = [];
+  , projectiles = []
+  , players = [];
 
 function updateCanvas(){
 	//Draw the map
 	map.draw(ctx);	
 	//Draw the characters
-	gameObjects.forEach(function(x){
+	projectiles.forEach(function(x){
+		if (x.exploded) {
+			projectiles.splice(projectiles.indexOf(x),1);
+		}
+		else {
+			x.update();
+			x.draw(ctx); 
+		}
+	});
+
+	players.forEach(function(x){
 		x.update();
 		x.draw(ctx);
 	});

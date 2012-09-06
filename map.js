@@ -13,12 +13,18 @@ function Column() {}
 //Represents the map in its entirety. 
 function Map(width) { if(width != null) this.width = null; this.generate(); }
 	Map.prototype.height      = 600; // default for our game
-	Map.prototype.width       = 900;
+	Map.prototype.width       = 1100;
 	Map.prototype.columns     = [];
 	Map.prototype.columnWidth = 15;
 	Map.prototype.walkHeight  = 240;
 	Map.prototype.dropHeight  = 100;
 
+	Map.prototype.getColumnHeight	= function(x){
+		return this.columns[Math.floor(x/this.columnWidth)].height;
+	}
+	Map.prototype.setColumnHeight = function(x,h){
+		this.columns[Math.floor(x/this.columnWidth)].height = h;
+	}
 	Map.prototype.generate = function () {
 		var numberOfColumns = this.width / this.columnWidth;
 		for (var x = 0; x < numberOfColumns; x++) {
@@ -38,10 +44,10 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 		}
 	}
 
-	//Draws the.. uh, sky.
+	//Draws the... uh, sky.
 	Map.prototype.drawSky = function (ctx){
 		ctx.fillStyle = "#53545E";
-		ctx.fillRect(0, 0, 900, 600);
+		ctx.fillRect(0, 0, this.width, this.height);
 	}
 
 	//Draws the ground.

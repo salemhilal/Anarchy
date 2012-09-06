@@ -3,24 +3,33 @@ used in weapons and interact with their environment. Each projectile defines a m
 damage amount and most importantly, a trajectory equation*/
 
 //Projectile object
-function Projectile(x,y, path) {
-	if(x != null){ this.x = x; } 
-	if(y != null){ this.y = y; }
-	if(path != null && typeof path == "function")
-		this.
+function Projectile(x,y, dx, dy, update) {
+	if(x != null && y != null){ this.coords = {x:x, y:y}; } 
+	if(dx != null && dy != null){ this.vector = {dx:dx, dy:dy}; }
+	if(update != null && typeof path == "function") //For custom defined paths
+		this.update = update;
 }
-	Projectile.prototype.x       		= 0;
-	Projectile.prototype.y       		= 0;
-	Projectile.prototype.mass           = 10;
-	Projectile.prototype.path			= function(x,y) => ({x:x-1, y:y});
-	//Projectile.prototype.intialPosition = (0,0);
+	Projectile.prototype.coords    		= {x:0, y:0};
+	Projectile.prototype.vector    		= {dx:0, dy:0};
+	Projectile.prototype.exploded       = false; //If the projectile has hit. 
 	Projectile.prototype.damageRaduis   = 2; //Columns left and right that get effected.
 	Projectile.prototype.height         = 10;
 	Projectile.prototype.width          = 10;
 	Projectile.prototype.damage         = 50; // Damage at center of radius
 	Projectile.prototype.explode        = function() {};
 	Projectile.prototype.drawArray      = []; // 2D array of integers that contain colors of pixels to draw
-	Projectile.prototype.update         = function(){}
+	Projectile.prototype.update         = function(){
+		var x = this.coords.x, y= this.coords.y, dx = this.vector.dx, dy = this.vector.dy, map = window.map;
+		if(window.map.getColumnHeight(x) >= y){ //Explode!
+			this.explode()
+			this.exploded = true;
+		}
+		else{
+			this.coords = {x:x + dx, y:y+dx};
+			this.vector = {dx:dx-1, dy: dy};
+		}
+
+	}
 	Projectile.prototype.draw           = function(ctx) {
 		//TODO: not a rectangle. Maybe
 		var x = this.x, y = this.y, width = this.width, height = this.height;
