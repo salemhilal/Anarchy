@@ -9,7 +9,6 @@ var frameLength = 20 //Update the frame 50 times/sec.
   , projectiles = []
   , players = [];
 
-<<<<<<< HEAD
 function explodeEffect(x, y, p, color){
 	for(var i = 0; i<3*Math.log(20 * p); i++){
 		projectiles.push(
