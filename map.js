@@ -18,15 +18,27 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	Map.prototype.columnWidth = 15;
 	Map.prototype.walkHeight  = 240;
 	Map.prototype.dropHeight  = 100;
-
+	//Gets the column at x
+	Map.prototype.getColumn = function(x){
+		if(this.columns[Math.floor(x/this.columnWidth)])
+			return this.columns[Math.floor(x/this.columnWidth)];
+		else
+			return null;
+	}
+	//Gets the height of the column at x
 	Map.prototype.getColumnHeight = function(x){
 		if(this.columns[Math.floor(x/this.columnWidth)])
 			return this.columns[Math.floor(x/this.columnWidth)].height;
 		else
 			return null;
 	}
+	//Sets the height of the column at x
 	Map.prototype.setColumnHeight = function(x,h){
 		this.columns[Math.floor(x/this.columnWidth)].height = h;
+	}
+	//Explodes column at x, with radius p
+	Map.prototype.explode = function(x,p){
+
 	}
 	Map.prototype.generate = function () {
 		var numberOfColumns = this.width / this.columnWidth;

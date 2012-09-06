@@ -10,6 +10,7 @@ function Projectile(x,y, dx, dy, update) {
 		this.update = update;
 }
 	Projectile.prototype.coords    		= {x:0, y:0};
+	Projectile.prototype.color 			= "#303030";
 	Projectile.prototype.vector    		= {dx:0, dy:0};
 	Projectile.prototype.exploded       = false; //If the projectile has hit. 
 	Projectile.prototype.damageRaduis   = 2; //Columns left and right that get effected.
@@ -21,23 +22,23 @@ function Projectile(x,y, dx, dy, update) {
 	Projectile.prototype.update         = function(){
 
 		var x = this.coords.x, y= this.coords.y, dx = this.vector.dx, dy = this.vector.dy, map = window.map;
-		console.log(x + " " + y + " " + window.map.getColumnHeight(x));
+		console.log(x + " " + y + " " + (window.map.height - window.map.getColumnHeight(x)));
 
-		if(window.map.getColumnHeight(x) <= y){ //Explode!
+		if(window.map.height - window.map.getColumnHeight(x) <= y){ //Explode!
 			console.log("exploding");
-			this.explode()
+			this.explode(window.map.getColumnHeight(x))
 			this.exploded = true;
 		}
 		else{
-			this.coords = {x:x - dx, y:y-dx};
-			this.vector = {dx:dx-1, dy: dy};
+			this.coords = {x:x + dx, y:y-dy};
+			this.vector = {dx:dx, dy: dy-.6};
 		}
 	}
 
 	Projectile.prototype.draw           = function(ctx) {
 		//TODO: not a rectangle. Maybe
 		var x = this.coords.x, y= this.coords.y, width = this.width, height = this.height;
-		ctx.fillStyle = "#0000FF";
+		ctx.fillStyle = this.color;
 		ctx.fillRect(x,y, width,  height);
 	};
 
