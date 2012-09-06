@@ -1,11 +1,14 @@
-function randomRange(x, y) {
-	return Math.floor( Math.random() * (y - x + 1) + x);
+//Returns a random int inside the given range
+function randomRange(low, high) {
+	return Math.floor( Math.random() * (high - low + 1) + low);
 }
 
+//Represents an individual column of the map.
 function Column() {}
-	Column.prototype.material = 0; // 0:Rock
+	Column.prototype.material = 0; // 0:Rock 
 	Column.prototype.height = 200;
 
+//Represents the map in its entirety. 
 function Map() {}
 	Map.prototype.height = 600; // default for our game
 	Map.prototype.columns = [];
@@ -18,7 +21,13 @@ function Map() {}
 		for (var x = 0; x < numberOfColumns; x++) {
 
 	    	var newColumn = new Column();
-	    	newColumn.height = randomRange(this.walkHeight - 20, this.walkHeight + 20);
+	    	if(x != 0 && Math.random() < .65){ 	//Use the old block height
+	    		newColumn.height = this.columns[x-1].height;
+	    	}
+	    	else{								//Generate a new one
+	    		newColumn.height = randomRange(this.walkHeight - 20, this.walkHeight + 20);
+	    	}
+
 	    	this.columns[x] = newColumn;
 		}
 	}
