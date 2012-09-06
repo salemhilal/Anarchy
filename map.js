@@ -19,7 +19,7 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	Map.prototype.walkHeight  = 240;
 	Map.prototype.dropHeight  = 100;
 
-	Map.prototype.getColumnHeight	= function(x){
+	Map.prototype.getColumnHeight = function(x){
 		return this.columns[Math.floor(x/this.columnWidth)].height;
 	}
 	Map.prototype.setColumnHeight = function(x,h){
