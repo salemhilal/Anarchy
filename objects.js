@@ -2,18 +2,34 @@
 used in weapons and interact with their environment. Each projectile defines a mass, damage raduius,
 damage amount and most importantly, a trajectory equation*/
 
-function Projectile() {}
-	Projectile.prototype.position = (0,0);
-	Projectile.prototype.mass = 10;
-	Projectile.prototype.intialPosition = (0,0);
-	Projectile.prototype.damageRaduis = 10;
-	Projectile.prototype.damage = 50; // Damage at center of radius
-	Projectile.prototype.explode = function() {};
-	Projectile.prototype.drawArray = []; // 2D array of integers that contain colors of pixels to draw
-	Projectile.prototype.update = function(){}
-	Projectile.prototype.draw = function(ctx) {};
+//Projectile object
+function Projectile(x,y, path) {
+	if(x != null){ this.x = x; } 
+	if(y != null){ this.y = y; }
+	if(path != null && typeof path == "function")
+		this.
+}
+	Projectile.prototype.x       		= 0;
+	Projectile.prototype.y       		= 0;
+	Projectile.prototype.mass           = 10;
+	Projectile.prototype.path			= function(x,y) => ({x:x-1, y:y});
+	//Projectile.prototype.intialPosition = (0,0);
+	Projectile.prototype.damageRaduis   = 2; //Columns left and right that get effected.
+	Projectile.prototype.height         = 10;
+	Projectile.prototype.width          = 10;
+	Projectile.prototype.damage         = 50; // Damage at center of radius
+	Projectile.prototype.explode        = function() {};
+	Projectile.prototype.drawArray      = []; // 2D array of integers that contain colors of pixels to draw
+	Projectile.prototype.update         = function(){}
+	Projectile.prototype.draw           = function(ctx) {
+		//TODO: not a rectangle. Maybe
+		var x = this.x, y = this.y, width = this.width, height = this.height;
+		ctx.fillStyle = "#0000FF";
+		ctx.fillRect(x,y,x-width, y-height);
+	};
 
 
+//Weapon object
 function Weapon() {}
 	Weapon.prototype.name = "Bow";
 	Weapon.prototype.currentMode = "primary"; // Primary or secondary mode
@@ -47,7 +63,7 @@ function Weapon() {}
 	}
 
 
-// Player prototype
+// Player object
 function Player() {}
 	Player.prototype.health = 100;
 	Player.prototype.x = 0;
