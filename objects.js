@@ -19,22 +19,26 @@ function Projectile(x,y, dx, dy, update) {
 	Projectile.prototype.explode        = function() {};
 	Projectile.prototype.drawArray      = []; // 2D array of integers that contain colors of pixels to draw
 	Projectile.prototype.update         = function(){
+
 		var x = this.coords.x, y= this.coords.y, dx = this.vector.dx, dy = this.vector.dy, map = window.map;
-		if(window.map.getColumnHeight(x) >= y){ //Explode!
+		console.log(x + " " + y + " " + window.map.getColumnHeight(x));
+
+		if(window.map.getColumnHeight(x) <= y){ //Explode!
+			console.log("exploding");
 			this.explode()
 			this.exploded = true;
 		}
 		else{
-			this.coords = {x:x + dx, y:y+dx};
+			this.coords = {x:x - dx, y:y-dx};
 			this.vector = {dx:dx-1, dy: dy};
 		}
-
 	}
+
 	Projectile.prototype.draw           = function(ctx) {
 		//TODO: not a rectangle. Maybe
-		var x = this.x, y = this.y, width = this.width, height = this.height;
+		var x = this.coords.x, y= this.coords.y, width = this.width, height = this.height;
 		ctx.fillStyle = "#0000FF";
-		ctx.fillRect(x,y,x-width, y-height);
+		ctx.fillRect(x,y, width,  height);
 	};
 
 
