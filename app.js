@@ -9,6 +9,7 @@ var frameLength = 20 //Update the frame 50 times/sec.
   , projectiles = []
   , players = [];
 
+<<<<<<< HEAD
 function explodeEffect(x, y, p, color){
 	for(var i = 0; i<3*Math.log(20 * p); i++){
 		projectiles.push(
@@ -22,6 +23,7 @@ function explodeEffect(x, y, p, color){
 		);
 	}
 }
+
 function updateCanvas(){
 	//Draw the map
 	map.draw(ctx);	
@@ -40,7 +42,7 @@ function updateCanvas(){
 	});
 
 	players.forEach(function(x){
-		x.update();
+		// x.update();
 		x.draw(ctx);
 	});
 }
@@ -51,7 +53,28 @@ function animationTest(){
 	//Explode things.
 }
 
+function keyPressed(event) {
+	if (event.keyCode === 37) {
+		players[0].x -= 5
+	}
+	else if (event.keyCode === 39) {
+		players[0].x += 5;
+	}
+	players[0].update()
+    updateCanvas();
+}
+
 //Animation loop
 var animator = setInterval(function(){
 	updateCanvas();
 }, frameLength)
+
+var x = new Player(50,0)
+x.update()
+players.push(x);
+updateCanvas();
+
+// Controller Stuff
+canvas.addEventListener('keydown', keyPressed, false);
+canvas.setAttribute('tabindex','0');
+canvas.focus();
