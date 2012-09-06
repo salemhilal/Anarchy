@@ -1,7 +1,6 @@
 
 
-
-
+var frameLength = 20 //Time, in ms, between frame renders. 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
@@ -12,19 +11,14 @@ var gameObjects = [];
 
 
 //Draws the.. uh, sky.
-function drawSky(ctx){
-	ctx.fillStyle = "#7E79EB";
-	ctx.fillRect(0, 0, 900, 600);
-}
+
 
 function drawMap(ctx){
 	map.draw(ctx)
 }
 
 function updateCanvas(){
-	//Draw the sky
-	drawSky(ctx);
-	//Overlay the map
+	//Draw the map
 	drawMap(ctx);	
 	//Draw the characters
 		//TODO
@@ -38,4 +32,4 @@ var animator = setInterval(function(){
 		map.generate(900);	
 	}
 	updateCanvas();
-}, 20)
+}, frameLength)

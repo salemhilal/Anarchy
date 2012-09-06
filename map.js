@@ -15,7 +15,7 @@ function Map() {}
 	Map.prototype.height = 600; // default for our game
 	Map.prototype.columns = [];
 	Map.prototype.columnWidth = 20;
-	Map.prototype.walkHeight = 300;
+	Map.prototype.walkHeight = 240;
 	Map.prototype.dropHeight = 100;
 
 	Map.prototype.generate = function (mapWidth) {
@@ -36,7 +36,16 @@ function Map() {}
 		}
 	}
 
+	Map.prototype.drawSky = function (ctx){
+	ctx.fillStyle = "#53545E";
+	ctx.fillRect(0, 0, 900, 600);
+}
+
 	Map.prototype.draw = function(ctx) {
+		//Draw the sky first
+		this.drawSky(ctx);
+
+		//Now render the ground
 		var pos = 0
 		  , columnWidth = this.columnWidth
 	      , mapHeight = this.height;
@@ -54,7 +63,7 @@ function Map() {}
 			ctx.fillStyle = "#9A4616";
 			ctx.fillRect(pos, mapHeight - toneHeight, columnWidth, toneHeight);
 
-			//Draw some grass
+			//Draw some grass, unless it's been blown off.
 			if(hasGrass){
 				ctx.fillStyle = "#539A44";
 				ctx.fillRect(pos, mapHeight-height, columnWidth, 15)
