@@ -61,7 +61,7 @@ function keyPressed(event) {
 		console.log("jump?");
 		if(players[0].canJump){
 			console.log("Jump!");
-			players[0].yspeed = 5; 	
+			players[0].yspeed = 15; 	
 			players[0].y-=2;
 		} 
 	}
@@ -77,7 +77,8 @@ function keyReleased(event){
 }
 
 function mousePressed(event) {
-	var x = event.pageX - canvas.offsetLeft;  
+console.log(event);
+	var x = (event.pageX - canvas.offsetLeft) - players[0].x ;
     var y = event.pageY - canvas.offsetTop;
     players[0].shootWeapon(x, y);
 }

@@ -54,7 +54,7 @@ function Weapon() {}
 	Weapon.prototype.size = 3;
 
 	Weapon.prototype.fire = function(x, y, mouseX, mouseY) {
-		var projectile = new Projectile(x, y, 10, 10);
+		var projectile = new Projectile(x, y, mouseX/50, (window.map.height - mouseY)/25);
 		window.projectiles.push(projectile);
 	}
 
@@ -156,7 +156,7 @@ function Player(x,y) {
 	}; 
 
 	Player.prototype.shootWeapon = function (mouseX, mouseY) {
-		this.currentWeapon.fire(this.x, this.y, mouseX, mouseY);
+		this.currentWeapon.fire(this.x + 21 * this.size, this.y + 15 * this.size, mouseX, mouseY);
 	};
 	Player.prototype.canJump = false;
 	Player.prototype.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
@@ -217,8 +217,6 @@ function Player(x,y) {
 			this.yspeed = 0;
 			var lhs = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1;
 			var rhs = window.map.height - window.map.getColumnHeight(this.x + 12 * this.size) -1;
-			console.log("lhs" + lhs);
-			console.log("rhs" + rhs);
 			if(lhs < rhs){
 				this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
 			}
