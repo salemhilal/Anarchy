@@ -51,27 +51,27 @@ function animationTest(){
 }
 
 function keyPressed(event) {
-	if (event.keyCode === 37) {//Move left
+	if (event.keyCode === 37 || event.keyCode === 65) {//Move left
 		players[0].xspeed = -4;
 	}
-	else if (event.keyCode === 39) {//move right
+	else if (event.keyCode === 39 || event.keyCode === 68) {//move right
 		players[0].xspeed = 4;
 	}
-	else if (event.keyCode === 38){
+	else if (event.keyCode === 38 || event.keyCode === 87){
 		console.log("jump?");
 		if(players[0].canJump){
 			console.log("Jump!");
-			players[0].yspeed = 15; 	
+			players[0].yspeed = 5; 	
 			players[0].y-=2;
 		} 
 	}
 }
 
 function keyReleased(event){
-	if (event.keyCode === 37) {//Move left
+	if (event.keyCode === 37 || event.keyCode === 65) {//Move left
 		players[0].xspeed = 0;
 	}
-	else if (event.keyCode === 39) {//move right
+	else if (event.keyCode === 39 || event.keyCode === 68) {//move right
 		players[0].xspeed = 0;
 	}
 }

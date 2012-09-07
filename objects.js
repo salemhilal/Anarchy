@@ -206,8 +206,8 @@ function Player(x,y) {
 			this.y = leftHeight;
 		}*/
 		//in the air.
-		if(window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1 > this.y+(25*this.size)
-			&& window.map.height - window.map.getColumnHeight(this.x + 20 * this.size) -1 > this.y+(25*this.size)){
+		if(window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) > this.y+(25*this.size)
+			&& window.map.height - window.map.getColumnHeight(this.x + 13 * this.size) > this.y+(25*this.size)){
 			this.canJump = false;
 			this.yspeed--;
 		}
@@ -223,7 +223,7 @@ function Player(x,y) {
 				this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
 			}
 			else {
-				this.y = window.map.height - window.map.getColumnHeight(this.x + 12 * this.size) - 25*this.size;	
+				this.y = window.map.height - window.map.getColumnHeight(this.x + 13 * this.size) - 25*this.size;	
 			}
 		}
 
