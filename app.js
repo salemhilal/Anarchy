@@ -76,6 +76,12 @@ function keyReleased(event){
 	}
 }
 
+function mousePressed(event) {
+	var x = event.pageX - canvas.offsetLeft;  
+    var y = event.pageY - canvas.offsetTop;
+    players[0].shootWeapon(x, y);
+}
+
 //Animation loop
 var animator = setInterval(function(){
 	updateCanvas();
@@ -88,6 +94,7 @@ players.push(x);
 // Controller Stuff
 canvas.addEventListener('keydown', keyPressed, false);
 canvas.addEventListener('keyup', keyReleased, false);
+canvas.addEventListener('mousedown', mousePressed, false);
 
 
 //Prep canvas for prime time. 

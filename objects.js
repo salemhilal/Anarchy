@@ -53,13 +53,9 @@ function Weapon() {}
 	Weapon.prototype.secondaryProjectile = Projectile();
 	Weapon.prototype.size = 3;
 
-	Weapon.prototype.fire = function(angle, power) {
-		if (this.ammunition > 0) {
-			//Render a projectile (give it coordinates and direction)
-			return true;
-		}
-		else
-			return false
+	Weapon.prototype.fire = function(x, y, mouseX, mouseY) {
+		var projectile = new Projectile(x, y, 10, 10);
+		window.projectiles.push(projectile);
 	}
 
 	Weapon.prototype.switchMode = function() {
@@ -132,7 +128,7 @@ function Player(x,y) {
 	Player.prototype.name = "Wilson";
 	Player.prototype.inverntory = [];
 	Player.prototype.weapons = []; // 0:Primary 2:Secondary 3:Grenades 4:Special
-	Player.prototype.currentWeapon = Player.prototype.weapons[0];
+	Player.prototype.currentWeapon = new Weapon();
 	Player.prototype.aimAngle = 0;
 	Player.prototype.score = 0; // Based on how many kills you have / how much havok you wreak
 
@@ -159,8 +155,8 @@ function Player(x,y) {
 		this.y += vector[1]; //Perhaps vector = {x:int, y:int}
 	}; 
 
-	Player.prototype.shootWeapon = function (x, y, mouseX, mouseY) {
-		this.currentWeapon.fire(x, y, mouseX, mouseY);
+	Player.prototype.shootWeapon = function (mouseX, mouseY) {
+		this.currentWeapon.fire(this.x, this.y, mouseX, mouseY);
 	};
 	Player.prototype.canJump = false;
 	Player.prototype.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
