@@ -150,10 +150,6 @@ function Player(x,y) {
 		   [1,1,1,1,1,5,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,1,1]];
 	Player.prototype.colors = {1: "", 2: "#dedcdb", 3:"#f1f1f1", 4:"#988e86", 5:"#493728", 6:"000000", 7:"ffffff"}
 	Player.prototype.update = function(){
-		//If the player's y is on that map chunk's map coordinate + 1, do nothing.
-		//else if it's above, move it down. 
-			//If it would pass through the height, move it to the ground.
-		//else move it to the ground (it shouldn't hit this case.)
 		var left = this.x + (this.size * 5)
 		var right = left + (this.size * this.drawArray.length)
 

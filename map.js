@@ -136,7 +136,7 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	}
 	//Draws the... uh, sky.
 	Map.prototype.drawSky = function (ctx){
-		ctx.fillStyle = "#53545E";
+		ctx.fillStyle = "#ececec";
 		ctx.fillRect(0, 0, this.width, this.height);
 	}
 
@@ -162,16 +162,16 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 			  , hasGrass = this.columns[x].hasGrass;
 	    	
 	    	//Draw column
-	    	ctx.fillStyle = "#B55D2A";
+	    	ctx.fillStyle = "#b9b9b9";
 			ctx.fillRect(pos, mapHeight - height, columnWidth, height);
 			
 			//Shade the column
-			ctx.fillStyle = "#9A4616";
+			ctx.fillStyle = "#9d9d9d";
 			ctx.fillRect(pos, mapHeight - toneHeight, columnWidth, toneHeight);
 
 			//Draw some grass, unless it's been blown off.
 			if(hasGrass){
-				ctx.fillStyle = "#539A44";
+				ctx.fillStyle = "#555555";
 				ctx.fillRect(pos, mapHeight-height, columnWidth, columnWidth)
 			}
 
