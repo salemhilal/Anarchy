@@ -159,8 +159,8 @@ function Player(x,y) {
 		this.y += vector[1]; //Perhaps vector = {x:int, y:int}
 	}; 
 
-	Player.prototype.shootWeapon = function (angle, power) {
-		this.currentWeapon.fire(angle, power);
+	Player.prototype.shootWeapon = function (x, y, mouseX, mouseY) {
+		this.currentWeapon.fire(x, y, mouseX, mouseY);
 	};
 	Player.prototype.canJump = false;
 	Player.prototype.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
