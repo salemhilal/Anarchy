@@ -51,11 +51,11 @@ function animationTest(){
 }
 
 function keyPressed(event) {
-	if (event.keyCode === 37 && players[0].xspeed > -4) {//Move left
-		players[0].xspeed--;
+	if (event.keyCode === 37) {//Move left
+		players[0].xspeed = -4;
 	}
-	else if (event.keyCode === 39 && players[0].xspeed < 4) {//move right
-		players[0].xspeed++;
+	else if (event.keyCode === 39) {//move right
+		players[0].xspeed = 4;
 	}
 	else if (event.keyCode === 38){
 		console.log("jump?");

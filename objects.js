@@ -221,14 +221,19 @@ function Player(x,y) {
 			this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
 		}
 
-		if(this.x + 5 * this.size > window.map.getWidth){
+		if(this.x + (5 * this.size) > window.map.width){
 			console.log("modulo");
-			this.x = (this.x + 5) % window.map.getWidth;
+			this.x = (this.x + 5) % window.map.width;
 		}
 
 
 		this.x += this.xspeed;
 		this.y -= this.yspeed;
+		if(window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1 <= this.y+(25*this.size)){
+			this.canJump = true;
+			this.yspeed = 0;
+			this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
+		}
 
 	}
 
