@@ -168,7 +168,8 @@ function Player(x,y) {
 			this.y = leftHeight;
 		}*/
 		//in the air.
-		if(window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1 > this.y+(25*this.size)){
+		if(window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1 > this.y+(25*this.size)
+			&& window.map.height - window.map.getColumnHeight(this.x + 20 * this.size) -1 > this.y+(25*this.size)){
 			this.canJump = false;
 			this.yspeed--;
 		}
@@ -176,12 +177,23 @@ function Player(x,y) {
 		else{
 			this.canJump = true;
 			this.yspeed = 0;
-			this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
+			var lhs = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1;
+			var rhs = window.map.height - window.map.getColumnHeight(this.x + 12 * this.size) -1;
+			console.log("lhs" + lhs);
+			console.log("rhs" + rhs);
+			if(lhs < rhs){
+				this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
+			}
+			else {
+				this.y = window.map.height - window.map.getColumnHeight(this.x + 12 * this.size) - 25*this.size;	
+			}
 		}
 
 		if(this.x + (5 * this.size) > window.map.width){
-			console.log("modulo");
 			this.x = (this.x + 5) % window.map.width;
+		}
+		if(this.x + (5 * this.size) <= 0){
+			this.x = window.map.width-30;
 		}
 
 
