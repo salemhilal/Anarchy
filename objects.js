@@ -51,6 +51,7 @@ function Weapon() {}
 	Weapon.prototype.accuracy = 20;
 	Weapon.prototype.primaryProjectile = Projectile();
 	Weapon.prototype.secondaryProjectile = Projectile();
+	Weapon.prototype.size = 3;
 
 	Weapon.prototype.fire = function(angle, power) {
 		if (this.ammunition > 0) {
@@ -70,8 +71,49 @@ function Weapon() {}
 		}
 	}
 
-	Weapon.prototype.drawArray = [] // 2D array of integers that contain colors of pixels to draw
-	Weapon.prototype.draw = function(ctx) { 
+	Weapon.prototype.colors = {1: "", 2: "#dedcdb", 3:"#f1f1f1", 4:"#988e86", 5:"#493728", 6:"000000", 7:"ffffff"}
+	Weapon.prototype.drawArray = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1,1,1],
+			   [1,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,6,1,1],
+			   [1,1,6,6,6,6,6,6,6,6,6,6,6,6,6,2,6,6,6,6,6,6,1,1,1],
+			   [1,1,2,2,2,2,1,1,1,1,1,1,1,6,6,2,2,1,1,1,1,1,1,1,1],
+		       [7,1,2,2,2,2,1,1,1,1,1,1,1,6,6,6,1,1,1,1,1,1,1,1,1],
+		       [7,7,1,1,1,1,1,1,1,1,1,1,1,6,6,6,1,1,1,1,1,1,1,1,1],
+		       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,1,1,1,1,1,1,1,1,1,1],
+		       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]] // 2D array of integers that contain colors of pixels to draw
+	Weapon.prototype.draw = function(ctx, x, y) {
+		var length = this.drawArray.length;
+		for (var i = 0; i < length; i++){
+			for (var j = 0; j < length; j++){
+				var pixel = this.drawArray[i][j]
+				if (pixel == 1){
+					continue
+				}
+				else {
+					var size = this.size
+					var xpos = j * size + x;
+					var ypos = i * size + y;
+					ctx.fillStyle = this.colors[pixel];
+					ctx.fillRect(xpos, ypos, size, size)
+				}
+			}
+		}
 
 	}
 
@@ -200,6 +242,10 @@ function Player(x,y) {
 				}
 			}
 		}
+		this.currentWeapon.draw(ctx, this.x, this.y);
+		ctx.fillStyle = this.colors[4];
+		var healthLength = Math.floor((20 * this.size) * (this.health / 100))
+		ctx.fillRect(this.x, this.y, healthLength, 2)
 	}
 
 
