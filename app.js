@@ -51,16 +51,20 @@ function animationTest(){
 }
 
 function keyPressed(event) {
-	if (event.keyCode === 37 && players[0].xspeed > -7) {//Move left
-		players[0].xspeed-= 2;
+	if (event.keyCode === 37 && players[0].xspeed > -4) {//Move left
+		players[0].xspeed--;
 	}
-	else if (event.keyCode === 39 && players[0].xspeed < 7) {//move right
-		players[0].xspeed+=2;
+	else if (event.keyCode === 39 && players[0].xspeed < 4) {//move right
+		players[0].xspeed++;
 	}
-	else if (event.keyCode === 32){
-
+	else if (event.keyCode === 38){
+		console.log("jump?");
+		if(players[0].canJump){
+			console.log("Jump!");
+			players[0].yspeed = 15; 	
+			players[0].y-=2;
+		} 
 	}
-	players[0].update()
 }
 
 function keyReleased(event){
