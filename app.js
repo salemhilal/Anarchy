@@ -54,7 +54,7 @@ function animationTest(){
 
 function keyPressed(event) {
 	if (event.keyCode === 37) {//Move left
-		players[0].x -= 5
+		players[0].x -= 5;
 	}
 	else if (event.keyCode === 39) {//move right
 		players[0].x += 5;

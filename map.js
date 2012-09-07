@@ -144,9 +144,6 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	Map.prototype.drawClouds = function(ctx){
 		this.cloud1 = (this.cloud1 + .5) % this.width;
 		this.cloud2 = (this.cloud2 + .2) % this.width;
-		console.log(this.cloud1)
-		console.log(this.cloud2)
-		console.log("those were clouds")
 		this.drawGrid(this.cloud, 3, [this.cloud2,20]);
     	this.drawGrid(this.cloud, 6, [this.cloud1,50]);
 	}
