@@ -168,14 +168,20 @@ function Player(x,y) {
 			this.y = leftHeight;
 		}*/
 		//in the air.
-		if(window.map.height - window.map.getColumnHeight(this.x) -1 > this.y+(25*this.size)){
+		if(window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) -1 > this.y+(25*this.size)){
+			this.canJump = false;
 			this.yspeed--;
 		}
 		//In/on the ground
 		else{
 			this.canJump = true;
 			this.yspeed = 0;
-			this.y = window.map.height - window.map.getColumnHeight(this.x) - 25*this.size;
+			this.y = window.map.height - window.map.getColumnHeight(this.x + 5 * this.size) - 25*this.size;
+		}
+
+		if(this.x + 5 * this.size > window.map.getWidth){
+			console.log("modulo");
+			this.x = (this.x + 5) % window.map.getWidth;
 		}
 
 
