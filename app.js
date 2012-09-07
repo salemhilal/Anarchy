@@ -52,10 +52,10 @@ function animationTest(){
 
 function keyPressed(event) {
 	if (event.keyCode === 37 && players[0].xspeed > -7) {//Move left
-		players[0].xspeed--;
+		players[0].xspeed-= 2;
 	}
 	else if (event.keyCode === 39 && players[0].xspeed < 7) {//move right
-		players[0].xspeed++;
+		players[0].xspeed+=2;
 	}
 	else if (event.keyCode === 32){
 

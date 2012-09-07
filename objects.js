@@ -166,9 +166,17 @@ function Player(x,y) {
 			this.y = leftHeight;
 		}*/
 		//in the air.
-		if(window.map.height - window.map.getColumnHeight(x) -1 > this.y){
+		console.log(window.map.height - window.map.getColumnHeight(this.x) -1);
+		console.log(this.y);
+		if(window.map.height - window.map.getColumnHeight(this.x) -1 > this.y+(25*this.size)){
 			this.yspeed--;
 		}
+		//In/on the ground
+		else{
+			this.yspeed = 0;
+			this.y = window.map.height - window.map.getColumnHeight(this.x) - 25*this.size;
+		}
+
 
 		this.x += this.xspeed;
 		this.y -= this.yspeed;
