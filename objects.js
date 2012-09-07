@@ -120,7 +120,7 @@ function Player(x,y) {
 	Player.prototype.shootWeapon = function (angle, power) {
 		this.currentWeapon.fire(angle, power);
 	};
-
+	Player.prototype.canJump = false;
 	Player.prototype.pickUpObject = function (objectName) {}; // Adds nearby object to inventory
 	Player.prototype.dropObject = function (objectName) {}; // Adds nearby object to inventory
 	Player.prototype.switchWeapon = function (objectName) {}; // Cycles through the players weapons
@@ -151,6 +151,8 @@ function Player(x,y) {
 		   [1,1,1,1,5,5,5,1,1,1,1,1,5,5,5,1,1,1,1,1,1,1,1,1,1],
 		   [1,1,1,1,1,5,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,1,1]];
 	Player.prototype.colors = {1: "", 2: "#dedcdb", 3:"#f1f1f1", 4:"#988e86", 5:"#493728", 6:"000000", 7:"ffffff"}
+	Player.prototype.renderedwidth = 25*this.size
+	Player.prototype.renderedheight = 25*this.size
 	Player.prototype.update = function(){
 		/*var left = this.x + (this.size * 5)
 		var right = left + (this.size * this.drawArray.length)
@@ -166,13 +168,12 @@ function Player(x,y) {
 			this.y = leftHeight;
 		}*/
 		//in the air.
-		console.log(window.map.height - window.map.getColumnHeight(this.x) -1);
-		console.log(this.y);
 		if(window.map.height - window.map.getColumnHeight(this.x) -1 > this.y+(25*this.size)){
 			this.yspeed--;
 		}
 		//In/on the ground
 		else{
+			this.canJump = true;
 			this.yspeed = 0;
 			this.y = window.map.height - window.map.getColumnHeight(this.x) - 25*this.size;
 		}
