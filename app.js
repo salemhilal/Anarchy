@@ -41,29 +41,35 @@ function updateCanvas(){
 	});
 
 	players.forEach(function(x){
-		// x.update();
+		x.update();
 		x.draw(ctx);
 	});
 }
 
 function animationTest(){
-	//Draw projectile
-	//Apply gravity
-	//Explode things.
+	var t = new Projectile(80,200,20,10); projectiles.push(t); 
 }
 
 function keyPressed(event) {
-	if (event.keyCode === 37) {//Move left
-		players[0].x -= 5;
+	if (event.keyCode === 37 && players[0].xspeed > -7) {//Move left
+		players[0].xspeed--;
 	}
-	else if (event.keyCode === 39) {//move right
-		players[0].x += 5;
+	else if (event.keyCode === 39 && players[0].xspeed < 7) {//move right
+		players[0].xspeed++;
 	}
 	else if (event.keyCode === 32){
 
 	}
 	players[0].update()
-    updateCanvas();
+}
+
+function keyReleased(event){
+	if (event.keyCode === 37) {//Move left
+		players[0].xspeed = 0;
+	}
+	else if (event.keyCode === 39) {//move right
+		players[0].xspeed = 0;
+	}
 }
 
 //Animation loop
@@ -74,10 +80,11 @@ var animator = setInterval(function(){
 var x = new Player(50,0);
 x.update();
 players.push(x);
-updateCanvas();
 
 // Controller Stuff
 canvas.addEventListener('keydown', keyPressed, false);
+canvas.addEventListener('keyup', keyReleased, false);
+
 
 //Prep canvas for prime time. 
 canvas.setAttribute('tabindex','0');

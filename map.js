@@ -15,7 +15,7 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 	Map.prototype.height      = 600; // default for our game
 	Map.prototype.width       = 1100;
 	Map.prototype.columns     = [];
-	Map.prototype.columnWidth = 15;
+	Map.prototype.columnWidth = 10;
 	Map.prototype.walkHeight  = 240;
 	Map.prototype.dropHeight  = 100;
 	Map.prototype.colors = {1: "", 2: "#dedcdb", 3:"#f1f1f1", 4:"#988e86", 5:"#493728", 6:"000000", 7:"ffffff", 8:"#fbf5f5", 9:"#e1e1e1"};
@@ -89,7 +89,7 @@ function Map(width) { if(width != null) this.width = null; this.generate(); }
 		var index = Math.floor(x/this.columnWidth);
 		if(this.columns[index] != null){
 
-			window.explodeEffect(x, this.height - this.getColumnHeight(x), p, "#B55D2A")
+			window.explodeEffect(x, this.height - this.getColumnHeight(x), p, "#b9b9b9")
 			col = this.columns[index]
 			col.hasGrass = false;
 			col.height = col.height -  parseInt(this.columnWidth * p);

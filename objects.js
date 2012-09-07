@@ -85,6 +85,8 @@ function Player(x,y) {
 	Player.prototype.health = 100;
 	Player.prototype.x = 0;
 	Player.prototype.y = 0;
+	Player.prototype.xspeed = 0;
+	Player.prototype.yspeed = 0;
 	Player.prototype.name = "Wilson";
 	Player.prototype.inverntory = [];
 	Player.prototype.weapons = []; // 0:Primary 2:Secondary 3:Grenades 4:Special
@@ -150,7 +152,7 @@ function Player(x,y) {
 		   [1,1,1,1,1,5,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,1,1]];
 	Player.prototype.colors = {1: "", 2: "#dedcdb", 3:"#f1f1f1", 4:"#988e86", 5:"#493728", 6:"000000", 7:"ffffff"}
 	Player.prototype.update = function(){
-		var left = this.x + (this.size * 5)
+		/*var left = this.x + (this.size * 5)
 		var right = left + (this.size * this.drawArray.length)
 
 		var leftHeight = window.map.height - window.map.getColumnHeight(left) - (this.size * this.drawArray.length);
@@ -162,7 +164,15 @@ function Player(x,y) {
 
 		else if (this.y > leftHeight && this.y > rightHeight){
 			this.y = leftHeight;
+		}*/
+		//in the air.
+		if(window.map.height - window.map.getColumnHeight(x) -1 > this.y){
+			this.yspeed--;
 		}
+
+		this.x += this.xspeed;
+		this.y -= this.yspeed;
+
 	}
 
 	Player.prototype.draw = function(ctx) {
