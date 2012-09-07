@@ -53,11 +53,14 @@ function animationTest(){
 }
 
 function keyPressed(event) {
-	if (event.keyCode === 37) {
+	if (event.keyCode === 37) {//Move left
 		players[0].x -= 5
 	}
-	else if (event.keyCode === 39) {
+	else if (event.keyCode === 39) {//move right
 		players[0].x += 5;
+	}
+	else if (event.keyCode === 32){
+
 	}
 	players[0].update()
     updateCanvas();
@@ -66,14 +69,16 @@ function keyPressed(event) {
 //Animation loop
 var animator = setInterval(function(){
 	updateCanvas();
-}, frameLength)
+}, frameLength);
 
-var x = new Player(50,0)
-x.update()
+var x = new Player(50,0);
+x.update();
 players.push(x);
 updateCanvas();
 
 // Controller Stuff
 canvas.addEventListener('keydown', keyPressed, false);
+
+//Prep canvas for prime time. 
 canvas.setAttribute('tabindex','0');
 canvas.focus();
